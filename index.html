@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A rule-based credit card transaction risk checker dashboard."
+    />
+    <title>Sentinel | Transaction Risk Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#top" aria-label="Sentinel home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M16 3.75 26.25 7.6v7.83c0 6.28-4.18 10.93-10.25 12.82C9.93 26.36 5.75 21.7 5.75 15.43V7.6L16 3.75Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="m11.25 15.8 3.1 3.1 6.7-7.05" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>sentinel</span>
+        </a>
+
+        <nav class="nav-list" aria-label="Main navigation">
+          <a class="nav-item active" href="#dashboard">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/></svg>
+            Overview
+          </a>
+          <a class="nav-item" href="#transaction-check">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6.5h16M4 12h16M4 17.5h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17 16v4m-2-2h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            Check transaction
+          </a>
+          <a class="nav-item" href="#activity">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19.5V4.5M4 19.5h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m7 15 3-4 3 2 5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Activity
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="protection-status">
+            <span class="status-pulse"></span>
+            <span>Rules engine active</span>
+          </div>
+          <p>Analysis happens locally in your browser.</p>
+        </div>
+      </aside>
+
+      <main id="top" class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Risk intelligence workspace</p>
+            <h1>Transaction overview</h1>
+          </div>
+          <div class="topbar-actions">
+            <span id="todayDate" class="date-label"></span>
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="avatar" aria-label="Analyst profile">AR</div>
+          </div>
+        </header>
+
+        <section id="dashboard" class="hero-section" aria-labelledby="dashboardHeading">
+          <div class="hero-copy">
+            <p class="eyebrow accent">Live monitoring</p>
+            <h2 id="dashboardHeading">Make confident decisions,<br /><span>before authorization.</span></h2>
+            <p>Review behavioral signals and identify suspicious transactions in seconds.</p>
+          </div>
+          <div class="hero-orbit" aria-hidden="true">
+            <div class="orbit-ring ring-one"></div>
+            <div class="orbit-ring ring-two"></div>
+            <div class="orbit-center">
+              <svg viewBox="0 0 32 32" fill="none"><path d="M16 3.75 26.25 7.6v7.83c0 6.28-4.18 10.93-10.25 12.82C9.93 26.36 5.75 21.7 5.75 15.43V7.6L16 3.75Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="m11.25 15.8 3.1 3.1 6.7-7.05" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="floating-dot dot-one"></span>
+            <span class="floating-dot dot-two"></span>
+          </div>
+        </section>
+
+        <section class="metric-grid" aria-label="Risk summary">
+          <article class="metric-card">
+            <div class="metric-icon blue"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h14v16H5z" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><p>Transactions reviewed</p><strong id="totalChecked">0</strong></div>
+            <span id="reviewedDelta" class="metric-delta positive">+0 today</span>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon red"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 8v4m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><p>High-risk flagged</p><strong id="highRiskCount">0</strong></div>
+            <span id="highRiskRate" class="metric-delta neutral">0% of checks</span>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon green"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" stroke="currentColor" stroke-width="1.8"/><path d="m8 12 2.6 2.6L16.5 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><p>Approval confidence</p><strong id="approvalRate">0%</strong></div>
+            <span class="metric-delta positive">Low risk activity</span>
+          </article>
+        </section>
+
+        <div class="workspace-grid">
+          <section id="transaction-check" class="panel transaction-panel" aria-labelledby="checkHeading">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">New review</p>
+                <h2 id="checkHeading">Check a transaction</h2>
+              </div>
+              <span class="live-badge"><i></i> Analyzer ready</span>
+            </div>
+
+            <form id="transactionForm" novalidate>
+              <div class="form-grid">
+                <label class="field amount-field">
+                  <span>Transaction amount</span>
+                  <div class="amount-input"><b>$</b><input id="amount" name="amount" type="number" inputmode="decimal" min="0.01" step="0.01" placeholder="0.00" required /></div>
+                </label>
+                <label class="field">
+                  <span>Merchant name</span>
+                  <input id="merchant" name="merchant" type="text" placeholder="e.g. Northstar Market" maxlength="60" required />
+                </label>
+                <label class="field">
+                  <span>Location</span>
+                  <div class="input-with-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg><input id="location" name="location" type="text" placeholder="City or online" maxlength="60" required /></div>
+                </label>
+                <label class="field">
+                  <span>Time of day</span>
+                  <select id="timeOfDay" name="timeOfDay" required>
+                    <option value="morning">Morning · 6am–12pm</option>
+                    <option value="afternoon">Afternoon · 12pm–6pm</option>
+                    <option value="evening" selected>Evening · 6pm–12am</option>
+                    <option value="overnight">Overnight · 12am–6am</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Card type</span>
+                  <select id="cardType" name="cardType" required>
+                    <option value="credit" selected>Credit card</option>
+                    <option value="debit">Debit card</option>
+                    <option value="virtual">Virtual card</option>
+                    <option value="prepaid">Prepaid card</option>
+                  </select>
+                </label>
+              </div>
+              <p id="formError" class="form-error" role="alert"></p>
+              <div class="form-actions">
+                <span>Only transaction context is analyzed—never a full card number.</span>
+                <button class="primary-button" type="submit">
+                  Analyze transaction
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <aside id="riskResult" class="panel result-panel empty-result" aria-live="polite">
+            <div class="result-empty-state">
+              <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 4 7v5c0 4.97 3.41 7.99 8 9 4.59-1.01 8-6.03 8-9V7l-8-4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+              <h2>Awaiting review</h2>
+              <p>Enter transaction details to generate a transparent risk assessment.</p>
+            </div>
+          </aside>
+        </div>
+
+        <section id="activity" class="panel activity-panel" aria-labelledby="activityHeading">
+          <div class="panel-heading activity-heading">
+            <div>
+              <p class="eyebrow">Review log</p>
+              <h2 id="activityHeading">Recent transactions</h2>
+            </div>
+            <div class="activity-tools">
+              <label class="filter-select"><span class="sr-only">Filter by risk</span><select id="riskFilter"><option value="all">All risk levels</option><option value="high">High risk</option><option value="medium">Medium risk</option><option value="low">Low risk</option></select></label>
+              <button id="clearHistory" class="text-button" type="button">Clear history</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Merchant</th><th>Amount</th><th>Location</th><th>Time</th><th>Card type</th><th>Risk level</th><th>Signals</th></tr>
+              </thead>
+              <tbody id="historyBody"></tbody>
+            </table>
+            <div id="emptyHistory" class="empty-history" hidden>No transactions match this filter.</div>
+          </div>
+        </section>
+
+        <footer>Sentinel uses explainable, rule-based indicators. Use established fraud controls before acting on a transaction.</footer>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
+
